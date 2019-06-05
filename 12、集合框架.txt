@@ -1,0 +1,176 @@
+1、集合与数组的区别
+	1) 使用数组的局限性
+		> 数组有局限性，比如声明了长度是10的数组，不够10个剩下的就浪费了，超过10，又放不下
+	2) ArrayList存放对象
+		> 为了解决数组的局限性，引入容器类的概念。最常见的容器类是ArrayList
+		> 容器的容量会随着对象的增加，自动增长，不用担心会出现数组的边界问题
+2、ArrayList常用方法
+	1) 增加 add(Object)或add(index, Object)
+	2) 判断是否存在 contains() 判断标准： 
+		> 是否是同一个对象，而不是name是否相同
+	3) 获取指定位置的对象 get()
+	4) 获取对象所处的位置 indexOf() 
+		> 判断标准是对象是否相同，而非对象的name值是否相等
+	5) 删除 remove(index) remove(Object)
+	6) 替换 set(index, Object)
+	7) 获取大小 size()
+	8) 转换为数组 (Hero[])toArray(new Hero[]{})
+		> 需要注意的是，如果要转换为一个Hero数组，那么需要传递一个Hero数组类型的对象给toArray()，这样toArray方法才知道，你希望转换为哪种类型的数组，否则只能转换为Object数组
+	9) 把一个容器所有对象都加进来 addAll(Collection)
+	10) 清空 clear()
+3、List接口
+	1) ArrayList和List
+		> ArrayList实现了接口List，常见的写法会把引用声明为接口List类型
+		   例：List heros = new ArrayList();
+	2) List接口的方法
+		> 因为ArrayList实现了List接口，所以List接口的方法ArrayList都实现了
+4、泛型Generic
+	1) 泛型Generic
+		> 不指定泛型的容器，可以放任何类型的元素；取对象时对象转型会出现问题，因为可以放任何对象；
+		   而且在容器里放太多的对象，就记不清哪个位置放的是哪种类型的对象了
+		> 指定了泛型的容器，只能放指定类型的元素以及其子类
+	2) 泛型的简写
+		> 完整写法：List<Hero> genericheros = new ArrayList<Hero>();
+		> 简写：List<Hero> genericheros = new ArrayList<>();
+5、遍历
+	1) for循环遍历
+		> 可以用size()和get()分别得到大小，和获取指定位置的元素，结合for循环就可以遍历出ArrayList的内容
+	2) 迭代器遍历
+		> 例：
+			Iterator it = heros.iterator();
+			while(it.hasNext()) {
+				it.next();
+			}
+		> 迭代器的for写法
+			for (Iterator it = heros.iterator();it.hasNext();) {
+				it.next();
+			}
+	3) 用增强型for循环
+		> 例：
+			for (Hero h : heros) {
+			}
+		> 增强型for循环，非常方便，是很多人的首选
+		> 不足：
+			1> 无法用来进行ArrayList的初始化
+			2> 无法得知当前是第几个元素了
+	> 不能够在使用Iterator和增强for循环遍历数据的同时，删除数据，否则会抛出ConcurrentModificationExceptio
+6、其他集合
+	1) LinkedList
+		> 序列分先进先出FIFO，先进后出FILO
+		    FIFO在Java中又叫Queue 队列
+		    FILO在Java中又叫Stack 栈
+		1> LinkedList与List接口
+			> 与ArrayList一样，LinkedList也实现了List接口，如add、remove、contains等方法。
+		2> 双向链表 Deque
+			> 除了实现List接口外，LinkedList还实现了双向链表结构Deque，方便在头尾插入删除数据
+		3> 队列-Queue
+			> LinkedList除了实现了List和Deque外，还实现了Queue接口(队列)
+			> offer 在最后添加元素 poll 取出第一个元素 peek 查看第一个元素
+		4> ArrayList与LinkedList的区别
+			> ArrayList 插入、删除数据慢；LinkedList 插入、删除数据块
+			> ArrayList 是顺序结构，所以定位很快。LinkedList是链表结构，必须一个一个数过去，才能定位到
+	2) 二叉树
+	3) HashMap
+		> HashMap<String,String> dictionary = new HashMap<>();
+		> dictionary.put("key1", "val1");
+		> dictionary.get("key1");
+		> dictionary.clear();
+		1> HashMap的键值对：HashMap存储数据的方式是--键值对
+		2> 键不能重复，值可以重复;相同的key,后面插入的元素会覆盖前面的元素
+	4) HashSet
+		1> 元素不能重复
+			> 第二次插入同样的数据，是插不进去的，容器中只会保留一个
+		2> 没有顺序
+			> Set中的元素，没有顺序。 HashSet的具体顺序，既不是按照插入顺序，也不是按照hashcode的顺序。
+		3> 遍历
+			> 遍历需要用到迭代器或增强型for循环
+		4> HashSet和HashMap的关系
+			> HashSet自身并没有独立的实现，而是在里面封装了一个HashMap。HashSet作为HashMap的key而存在的
+			   而value是一个命名为PRESENT的static的Object对象，因为是一个类属性，所以只会有一个
+	5) Collection
+		> Collection是Set List Queue Deque的接口
+		> Queue：先进先出队列 Deque：双向链表
+		> 注：Collection和Map之间没有关系，Collection是放一个一个对象的，Map是放键值对的
+		> 注： Deque继承了Queue,间接继承了Collection
+	6) Collections
+		> Collections是一个容器的工具类，就如果Arrays是数组的工具类
+		1> 翻转
+			> reverse 使List中的数据发生翻转
+		2> 混淆
+			> shuffle 混淆List中数据的顺序
+		3> 排序
+			> sort 对List中的数据进行排序
+		4> 交换
+			> swap 交换两个数据的位置
+		5> 滚动
+			> rotate 把List中的数据，向右滚动指定单位的长度
+		6> 线程安全化
+			> synchronizedList 把非线程安全的List转换为线程安全的List。
+7、关系与区别
+	1) ArrayList  VS HashSet
+		1> 顺序： ArrayList有顺序、HashSet无顺序
+		2> 重复： List中的数据可以重复、Set中的数据不能重复
+		3> 重复判断标准是：
+			> 首先看hashcode是否相同：
+			    如果hashcode不同，则认为是不同数据
+			    如果hashcode相同，再比较equals，如果相同则是相同数据，否则是不同数据
+	2) ArrayList VS LinkedList
+		1> ArrayList和LinkedList的区别
+			> ArrayList 插入、删除数据慢；LinkedList 插入、删除数据快
+			> ArrayList是顺序结构，所以定位快；Linked是链表结构，所以定位慢
+	3) HashMap VS HashTable
+		> HashMap和Hashtable都实现了Map接口，都是键值对保存数据的方式
+		1> 区别1：
+			> HashMap可以存放null
+			> Hashtable不可以存放null
+		2> 区别2：
+			> HashMap不是线程安全的类
+			> Hashtable是线程安全的类
+	4) HashSet LinkedHashSet TreeSet
+		> HashSet：无序
+		> LinkedHashSet：按照插入顺序
+		> TreeSet：从小到大排序
+8、其他
+	1) hashcode原理
+		1> List查找的低效率
+			> 查找List中的某个元素，List的做法是对每一个进行挨个遍历，最差需要全部遍历完才能找到
+		2> HashMap的性能表现
+			> 查找HashMap中的元素，性能表现卓越
+		3> HashMap原理与字典
+			> 例：比如要找一个单词对应的中文意思，假设单词是Lengendary,首先在目录找到Lengendary在第 555页。
+			   然后，翻到第555页，这页不只一个单词，但是量已经很少了，逐一比较，很快就定位目标单词Lengendary。
+			   555相当于就是Lengendary对应的hashcode
+		4> 分析HashMap性能卓越的原因
+			> -----hashcode概念-----HashMap的每一个元素都有一个对应的hashcode(散列值) 
+			    比如字符串“gareen”对应的是1001
+			> -----保存数据----HashMap的每一个元素都保存到对应的hashcode值的位置上 
+			    例：要存放名字是"gareen"的英雄，就把该英雄和名称组成一个键值对，存放在数组的1001这个位置上
+			> -----查找数据-----在HashMap中查找一个元素，首先计算出它的hashcode，然后根据这个hashcode作为下标进行定位。如果这个位置有多个元素，那么就比较元素是否相同
+			    比如要查找gareen，首先计算"gareen"的hashcode是1001，根据1001这个下标，到数组中进行定位，（根据数组下标进行定位，是非常快速的） 发现1001这个位置就只有一个英雄，那么该英雄就是gareen.
+			    比如要查找annie，首先计算"annie"的hashcode是1008，根据1008这个下标，到数组中进行定位，发现1008这个位置有两个英雄，那么就对两个英雄的名字进行逐一比较(equals)，因为此时需要比较的量就已经少很多了，很快也就可以找出目标英雄
+			    这就是使用hashmap进行查询，非常快原理。
+		5> HashSet判断是否重复
+			> HashSet的数据是不能重复的，相同数据不能保存在一起，到底如何判断是否是重复的呢？
+			根据HashSet和HashMap的关系，我们了解到因为HashSet没有自身的实现，而是里面封装了一个HashMap，
+			所以本质上就是判断HashMap的key是否重复。
+			key是否重复，是由两个步骤判断的：
+			hashcode是否一样：
+				如果hashcode不一样，就是在不同的坑里，一定是不重复的
+				如果hashcode一样，就是在同一个坑里，还需要进行equals比较
+					如果equals一样，则是重复数据
+					如果equals不一样，则是不同数据。
+	2) 比较器
+		1> Comparator  自定义Comparator，指定比较的算法
+			例：
+				假设Hero有三个属性 name,hp,damage
+				一个集合中放存放10个Hero,通过Collections.sort对这10个进行排序
+				那么到底是hp小的放前面？还是damage小的放前面？Collections.sort也无法确定
+				所以要指定到底按照哪种属性进行排序
+				这里就需要提供一个Comparator给定如何进行两个对象之间的大小比较
+		2> Comparable 实现Comparable接口
+			> 在实现类里实现Comparable接口的compareTo方法；Collections.sort就有足够的信息进行排序了，也无需额外提供比较器Comparator
+		3> 自定义顺序的TreeSet 
+			> 默认情况下，TreeSet中的数据是从小到大排序的，不过TreeSet的构造方法支持传入一个Comparator
+			   public TreeSet(Comparator comparator) 进行自定义排序
+	3) 聚合操作
+		> 对集合的聚合操作，可以非常容易的遍历，筛选，比较集合中的元素

@@ -1,0 +1,81 @@
+重点关注：
+1、集合框架
+2、多线程
+3、I/O
+4、Lambda
+5、泛型
+6、反射机制
+7、注解
+8、网络编程
+9、Servlet
+10、JVM
+
+1、SSM
+2、SpringBoot
+3、Maven
+4、Docker
+5、消息中间件
+6、Log4j
+7、Redis
+8、Git
+9、Nginx
+10、Tomcat
+11、SpringCloud
+
+一、JAVA 基础
+0、面向对象
+1、变量
+2、操作符
+3、控制流程
+4、数组
+5、类和对象
+6、接口和继承
+7、数字和字符串
+8、日期
+二、JAVA 中级
+1、异常处理
+2、I/O
+3、集合框架
+4、泛型
+5、Lambda
+6、多线程
+7、JDBC
+8、网络编程
+三、JAVA 高级
+1、反射机制
+2、注解
+四、J2EE
+1、Tomcat
+2、Servlet
+3、HTTP协议
+4、MVC
+5、Filter
+6、Listener
+五、JAVA 框架
+1、Spring
+2、Spring MVC
+3、Mybatis
+4、SSM
+5、SpringBoot
+六、工具和中间件
+1、Maven
+2、调试
+3、Git
+4、IDEA
+5、Redis
+6、Nginx
+7、部署到Linux
+8、WebSocket
+9、QRCode
+10、搜索引擎：Lucene, Solr和ElasticSearch
+11、定时器：quartz
+12、安全框架：Shiro
+13、虚拟机VMWare
+14、Docker
+15、消息中间件
+七、分布式和集群
+SpringCloud
+八、JAVA 应用
+1、Log4j
+2、JUnit
+3、Hutool

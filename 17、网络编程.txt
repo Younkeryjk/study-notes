@@ -1,0 +1,52 @@
+1、端口
+	1) IP地址
+		> 在网络中每台计算机都必须有一个IP地址：32位，4个字节，常用点分十进制的格式表示
+		> 127.0.0.1是固定IP地址，代表当前计算机
+	2) 端口
+		> 两台计算机进行连接，总有一台服务器，一台客户端。服务器和客户端之间的通信通过端口进行。
+	3) 获取本机IP地址
+		> InetAddress.getLocalHost().getHostAddress();
+	4) ping命令
+		> 使用ping判断一个地址是否能够到达
+		> 响应时间 time<1ms表示很快，局域网一般就是这个响应时间
+		> 返回Request timed out表示时间较久都没有响应返回，基本判断这个地址不可用
+	5) 使用Java执行ping命令
+		> 借助 Runtime.getRuntime().exec() 可以运行一个windows的exe程序
+2、Socket
+	> 使用Socket(套接字)进行不同的程序之间的通信
+	1) 建立连接
+		1> 服务器端开启8888端口，并监听着，时刻等待着客户端的连接请求
+		2> 客户端知道服务端的ip地址和监听端口号，发出请求到服务器
+		3> 一旦建立了连接，服务端会得到一个新的Socket对象，该对象负责与客户端进行通信。
+		> 注：客户端的端口地址是系统分配的，通常大于1024
+		> 注：在开发调试过程中，如果修改了服务器Server代码，要关闭启动的Sever，否则新的Server不能启动，因为8888端口被占用了。
+	2) 收发数字
+		1> 客户端打开输出流，并发送数字
+			例：
+				OutputStream os = s.getOutputStream();
+				os.write(110);
+		2> 服务端打开输入流，接受数字
+			例：
+				InputStream is = s.getInputStream();
+				int msg = is.read();
+	3) 收发字符串
+		> 直接使用字节流收发字符串比较麻烦，使用数据流对字节流进行封装，就方便多了
+			1> 把输出流封装在DataOutputStream中，使用writeUTF发送字符串
+				例：
+					OutputStream os = s.getOutputStream();
+					DataOutputStream dos = new DataOutputStream(os);
+					dos.writeUTF("Legendary!");
+			2> 把输入流封装的DataInputStream，使用readUTF读取字符串
+				例：
+					InputStream is = s.getInputStream();
+					DataInputStream dis = new DataInputStream(is);
+					String msg = dis.readUTF();
+	4) 使用Scanner
+		> 使用Scanner读取控制台的输入，并发送到服务端，这样每次都可以发送不同的数据了。
+			例：
+				Scanner sc = new Scanner(System.in);
+				String str = sc.next();
+				dos.writeUTF(str);
+3、多线程聊天
+	> 如果使用单线程开发Socket应用，那么同一时间，要么收消息，要么发消息，不能同时进行。 
+	   为了实现同时收发消息，就需要用到多线程
