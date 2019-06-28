@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.how2java.mapper.ProductMapper">
+	<resultMap type="Product" id="productBean">
+		<id column="pid" property="id"/>
+		<result column="pname" property="name"/>
+		<result column="price" property="price" />
+     
+     	<association property="category" javaType="Category">
+     		<id column="cid" property="id"/>
+            <result column="cname" property="name"/>
+     	</association>
+	</resultMap>
+	<insert id="add" parameterType="Product">
+		insert into product_ (name,price,cid) values (#{name}, #{price}, #{category.id})
+	</insert>
+	<delete id="delete" parameterType="Product">
+		delete from product_ where id=#{id}
+	</delete>
+	<update id="update" parameterType="Product">
+		update product_ set name=#{name}, price=#{price} , cid=#{category.id}  where id=#{id}
+	</update>
+	<select id="get" parameterType="_int" resultMap="productBean">
+		select 
+			c.*, p.*, c.id 'cid', p.id 'pid', c.name 'cname', p.name 'pname' 
+			from category_ c 
+			left join product_ p 
+			on c.id = p.cid
+			where p.id=#{id}
+	</select>
+	<select id="list" parameterType="map" resultMap="productBean">
+		 select 
+		 	c.*, p.*, c.id 'cid', p.id 'pid', c.name 'cname', p.name 'pname' 
+		 	from category_ c 
+		 	left join product_ p 
+		 	on c.id = p.cid
+		 	where p.cid = #{category.id} order by p.id desc
+		 	<if test="page.start!=null and page.count!=null">
+		 		limit #{page.start},#{page.count}
+		 	</if>
+	</select>
+	<select id="total" parameterType="Category" resultType="_int">
+		select count(*) from   product_ where  cid=#{id}
+	</select>
+</mapper>
