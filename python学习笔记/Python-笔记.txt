@@ -1,0 +1,189 @@
+1、数据类型
+1) 整数：Python可以处理任意大小的整数，当然包括负整数，Java对32位整数的范围限制在-2147483648-2147483647
+2) 浮点数:整数和浮点数在计算机内部存储的方式是不同的，整数运算永远是精确的，而浮点数运算则可能会有四舍五入的误差。
+3) 字符串:转义字符\来标识，Python还允许用r''表示''内部的字符串默认不转义，Python允许用'''...'''的格式表示多行内容
+4) 布尔值:布尔值可以用and、or和not运算
+5) 空值:用None表示
+6) 列表、元祖：
+	list.append() 追加元素到末尾
+	list.insert(index, var)把元素插入到指定的位置
+	list.pop([index]) 删除最后一个元素，并返回，如果有index则删除指定索引的元素
+	del list[index] 删除
+	list.sort()按字母顺序永久修改排序 影响原列表 加reverse=True倒序 
+	list.sorted()按字母顺序临时排序 不影响原列表 加reverse=True倒序
+	list.reverse()倒序 永久修改排序
+	元祖一旦初始化就不能修改
+7) 字典、集合：
+	字典：
+	1) 字典内部存放的顺序和key放入的顺序是没有关系的
+	2) 字典的key必须是不可变对象，list是可变的，就不能作为key
+	3) for k,v in dict.items()循环字典
+	for k in dict.keys()遍历字典所有键
+	for v in dict.values()遍历字典所有值
+	4) 和list比较，dict有以下几个特点：
+		1、查找和插入的速度极快，不会随着key的增加而变慢；
+		2、需要占用大量的内存，内存浪费多。
+		
+	集合：
+	1) 集合和字典类似，也是一组key的集合，但不存储value，且key不能重复
+	2) add(key)方法可以添加元素到set中
+	3) remove(key)方法可以删除元素
+	4) set可以看成数学意义上的无序和无重复元素的集合，因此，两个set可以做数学意义上的交集、并集等操作
+2、变量：对变量赋值x = y是把变量x指向真正的对象，该对象是变量y所指向的。随后对变量y的赋值不影响变量x的指向。
+3、常量：/除法计算结果是浮点数，//，称为地板除，两个整数的除法仍然是整数
+4、字符串和编码：
+1) 在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码
+2) 注意区分'ABC'和b'ABC'，前者是str，后者虽然内容显示得和前者一样，但bytes的每个字符都只占用一个字节
+3) 当str和bytes互相转换时，需要指定编码
+5、条件判断：if 、elif 、else
+6、循环：for x in、while、break、continue
+	break语句可以在循环过程中直接退出循环，而continue语句可以提前结束本轮循环，并直接开始下一轮循环
+7、函数：
+	1) pass可以用来作为占位符
+	2) 数据类型检查可以用内置函数isinstance()实现
+	3) 函数执行完毕也没有return语句时，自动return None
+	4) 可以返回多个值,但其实这只是一种假象，原来返回值是一个元祖
+	5) 位置参数、可变参数(*keywords)、关键字参数(**keywords 键值对)、命名关键字参数
+		(1)定义可变参数和定义一个list或tuple参数相比，仅仅在参数前面加了一个*号。在函数内部，参数numbers接收到的是一个tuple
+		(2)如果已经有一个list或者tuple，在list或tuple前面加一个*号，把list或tuple的元素变成可变参数传进去
+		(3)def fn(arg1, arg2, *, arg3, arg4):和关键字参数**kw不同，命名关键字参数需要一个特殊分隔符*，*后面的参数被视为命名关键字参数。
+	6) 默认参数:必选参数在前，默认参数在后;当函数有多个参数时，把变化大的参数放前面，变化小的参数放后面。变化小的参数就可以作为默认参数。
+	7) 参数组合:参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。
+	8) 对于任意函数，都可以通过类似func(*args, **kw)的形式调用它，无论它的参数是如何定义的。
+	9) *args是可变参数，args接收的是一个tuple；**kw是关键字参数，kw接收的是一个dict。
+	10) 可变参数既可以直接传入：func(1, 2, 3)，又可以先组装list或tuple，再通过*args传入：func(*(1, 2, 3))；
+	关键字参数既可以直接传入：func(a=1, b=2)，又可以先组装dict，再通过**kw传入：func(**{'a': 1, 'b': 2})。
+	11) 命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符*，否则定义的将是位置参数。
+	12) 递归函数：使用递归函数的优点是逻辑简单清晰，缺点是过深的调用会导致栈溢出。针对尾递归优化的语言可以通过尾递归防止栈溢出。尾递归事实上和循环是等价的，
+	没有循环语句的编程语言只能通过尾递归实现循环。Python标准的解释器没有针对尾递归做优化，任何递归函数都存在栈溢出的问题。
+8、切片：
+ L[startIndex:endIndex:step]
+ 支持倒数切片
+ [:]就可以原样复制一个list 跟var1 = var2不同 第二种方式是指向相同，改变var2，var1值不会变
+ tuple也可以用切片操作，只是操作的结果仍是tuple
+ 字符串'xxx'也可以看成是一种list
+9、列表生成式：
+	[x * x for x in range(1, 11)]
+	for循环后面还可以加上if判断[x * x for x in range(1, 11) if x % 2 == 0]
+	还可以使用两层循环，可以生成全排列：[m + n for m in 'ABC' for n in 'XYZ']
+	列表生成式可以使用两个变量来生成list：[k + '=' + v for k, v in d.items()]
+10、生成器：一边循环一边计算的机制，称为生成器：generator
+	1) 列表把[]改为()即为生成器
+	2) 通过next()函数获得generator的下一个返回值(没值时会报错，可用for替换)
+11、迭代器
+	可以直接作用于for循环的数据类型有以下几种：一类是集合数据类型，如list、tuple、dict、set、str等；一类是generator，包括生成器和带yield的generator function。
+	这些可以直接作用于for循环的对象统称为可迭代对象：Iterable。可以使用isinstance()判断一个对象是否是Iterable对象：
+	可以被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator；生成器都是Iterator对象，但list、dict、str虽然是Iterable，却不是Iterator。
+	把list、dict、str等Iterable变成Iterator可以使用iter()函数：Iterator不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的
+12、函数式编程：
+	1) 高阶函数：变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数;
+		把函数作为参数传入，这样的函数称为高阶函数，函数式编程就是指这种高度抽象的编程范式。
+		(1)变量可以指向函数
+		(2)map/reduce  map(fn, List)
+		(3)filter用于过滤,根据返回值是True还是False决定保留还是丢弃该元素。
+		(4)sorted 可以接收一个key函数来实现自定义的排序，要进行反向排序，可以传入第三个参数reverse=True
+13、函数作为返回值：
+	1) 闭包:返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量。
+		如果一定要引用循环变量,再创建一个函数，用该函数的参数绑定循环变量当前的值，无论该循环变量后续如何更改，已绑定到函数参数的值不变：
+		返回一个函数时，牢记该函数并未执行，返回函数中不要引用任何可能会变化的变量。
+14、匿名函数：
+	1) lambda x : x * x 关键字lambda表示匿名函数，冒号前面的x表示函数参数；
+	2) 匿名函数有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果。
+	3) 用匿名函数有个好处，因为函数没有名字，不必担心函数名冲突。
+	4) 可以把匿名函数赋值给一个变量，再利用变量来调用该函数
+	5) 也可以把匿名函数作为返回值返回 def build(x, y):
+										return lambda: x * x + y * y
+15、装饰器：Python的decorator可以用函数实现，也可以用类实现。decorator可以增强函数的功能
+16、偏函数：functools.partial的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数；例：int2 = functools.partial(int, base=2)
+
+17、模块：
+1) 模块是扩展名为.py的文件
+2) 每一个包目录下面都会有一个__init__.py的文件，这个文件是必须存在的
+3) 导入整个模块 import module_name
+4) 导入模块中的特定函数 from module_name import function_0, function_1, function_2
+5) 使用as 给函数指定别名 如果要导入的函数的名称可能与程序中现有的名称冲突，或者函数的名称太长，可指定简短而独一无二的别名
+6) 使用as 给模块指定别名
+7) 作用域：__xxx__这样的变量是特殊变量，可以被直接引用，但是有特殊用途；类似_xxx和__xxx这样的函数或变量就是非公开的（private），不应该被直接引用(而不是“不能”被直接引用)
+18、IO编程：
+1) Stream（流）是一个很重要的概念，可以把流想象成一个水管，数据就是水管里的水，但是只能单向流动。Input Stream就是数据从外面（磁盘、网络）流进内存，Output Stream就是数据从内存流到外面去。
+2) 同步IO：是CPU等着，也就是程序暂停执行后续代码，等100M的数据在10秒后写入磁盘，再接着往下执行；异步相反
+3) 读取二进制文件，比如图片、视频用'rb'模式打开文件
+4) 使用with语句操作文件IO是个好习惯
+5) StringIO就是在内存中读写str；操作二进制数据，就需要使用BytesIO
+6) 把两个路径合成一个时，不要直接拼字符串，而要通过os.path.join()函数，这样可以正确处理不同操作系统的路径分隔符；
+	要拆分路径时，也不要直接去拆字符串，而要通过os.path.split()函数，这样可以把一个路径拆分为两部分，后一部分总是最后级别的目录或文件名，os.path.splitext()可以直接让你得到文件扩展名，
+7) 这些合并、拆分路径的函数并不要求目录和文件要真实存在，它们只对字符串进行操作
+8） 序列化：变量从内存中变成可存储或传输的过程称之为序列化
+	(1)pickle.dumps()序列化；pickle.loads()方法反序列化
+9) Json:
+	json.dumps把Python对象变成一个JSON json.loads把JSON的字符串反序列化；json.load从file-like Object中读取字符串并反序列化
+	当默认的序列化或反序列机制不满足我们的要求时，我们又可以传入更多的参数来定制序列化或反序列化的规则：json.dumps(s, default=student2dict)
+18、常用模块：
+1) datetime：
+	获取当前日期和时间 datetime.now()
+	获取指定日期和时间 datetime(Y, m, d, H, i, s)
+	datetime转换为timestamp datetime(Y, m, d, H, i, s).timestamp()
+	timestamp转换为datetime datetime.fromtimestamp(t)
+	timestamp转换UTC标准时区的时间 datetime.utcfromtimestamp(t)
+	str转换为datetime datetime.strptime() datetime.strptime('2015-6-1 18:19:59', '%Y-%m-%d %H:%M:%S')
+	datetime转换为str strftime()   datetime.now().strftime('%a, %b %d %H:%M')
+	datetime加减 datetime.now() + timedelta(days=2, hours=12)
+	时区转换:通过utcnow()拿到当前的UTC时间，通过astimezone()方法，可以转换到任意时区
+2) collections(集合类) ：
+	namedtuple是一个函数，它用来创建一个自定义的tuple对象，并且规定了tuple元素的个数，并可以用属性而不是索引来引用tuple的某个元素。namedtuple('Point', ['x', 'y'])
+	deque：使用list存储数据时，按索引访问元素很快，但是插入和删除元素就很慢了，deque是为了高效实现插入和删除操作的双向列表，适合用于队列和栈
+	defaultdict：使用dict时，如果希望key不存在时，返回一个默认值，就可以用defaultdict
+	OrderedDict：使用dict时，Key是无序的。要保持Key的顺序，可以用OrderedDict
+	Counter：是一个简单的计数器，例如，统计字符出现的个数
+3) Base64： base64.b64encode、base64.b64decode、base64.urlsafe_b64encode、base64.urlsafe_b64decode
+4)struct:struct模块来解决bytes和其他二进制数据类型的转换。struct.pack、struct.unpack
+5) hashlib：摘要算法，如MD5，SHA1
+6) hmac：hmac和普通hash算法非常类似。hmac输出的长度和原始哈希算法的长度一致。需要注意传入的key和message都是bytes类型，str类型需要首先编码为bytes。
+7) 	itertools:用于操作迭代对象的函数。
+	chain：可以把一组迭代对象串联起来，形成一个更大的迭代器。
+	groupby：把迭代器中相邻的重复元素挑出来放在一起。
+	contextlib：
+				只要正确实现了上下文管理，就可以用于with语句。实现上下文管理是通过__enter__和__exit__这两个方法实现的。
+				可以用closing()来把该对象变为上下文对象，with closing(urlopen('https://www.python.org')) as page:
+8) urllib:提供了一系列用于操作URL的功能,urllib提供的功能就是利用程序去执行各种HTTP请求。
+9) XML：操作XML有两种方法：DOM和SAX。DOM会把整个XML读入内存，解析为树，因此占用内存大，解析慢，优点是可以任意遍历树的节点。
+		SAX是流模式，边读边解析，占用内存小，解析快，缺点是我们需要自己处理事件。
+10)HTMLParser：解析HTML
+19、常用第三方模块：
+1)Pillow：图像处理
+2)requests：内置的urllib模块，用于访问网络资源。但是，它用起来比较麻烦，而且，缺少很多实用的高级功能。更好的方案是使用requests。
+			requests的方便之处还在于，对于特定类型的响应，例如JSON，可以直接获取
+3)chardet：检测编码：chardet.detect(b'Hello, world!')
+4)psutil：监控系统运行的状态
+19、virtualenv：独立的Python运行环境
+20、TCP协议：用TCP协议进行Socket编程，对于客户端，要主动连接服务器的IP和指定端口，对于服务器，要首先监听指定端口，然后，对每一个新的连接，创建一个线程或进程来处理。通常，服务器程序会无限运行下去。
+21、UDP协议：UDP的使用与TCP类似，但是不需要建立连接。此外，服务器绑定UDP端口和TCP端口互不冲突，也就是说，UDP的9999端口与TCP的9999端口可以各自绑定。
+22、电子邮件：MUA：Mail User Agent——邮件用户代理；MTA：Mail Transfer Agent——邮件传输代理；MDA：Mail Delivery Agent——邮件投递代理
+			发件人 -> MUA -> MTA -> MTA -> 若干个MTA -> MDA <- MUA <- 收件人
+			编写程序来发送和接收邮件，本质上就是：编写MUA把邮件发到MTA；编写MUA从MDA上收邮件。
+			发邮件时，MUA和MTA使用的协议就是SMTP：Simple Mail Transfer Protocol，后面的MTA到另一个MTA也是用SMTP协议。
+			收邮件时，MUA和MDA使用的协议有两种：POP：Post Office Protocol，目前版本是3，俗称POP3；
+			IMAP：Internet Message Access Protocol，目前版本是4，优点是不但能取邮件，还可以直接操作MDA上存储的邮件
+	SMTP发送邮件：Python对SMTP支持有smtplib和email两个模块，email负责构造邮件，smtplib负责发送邮件。
+	POP3收取邮件：用Python的poplib模块收取邮件分两步：第一步是用POP3协议把邮件获取到本地，第二步是用email模块把原始邮件解析为Message对象，然后，用适当的形式把邮件内容展示给用户即可。
+类：	
+类是创建实例的模板，而实例则是一个一个具体的对象，各个实例拥有的数据都互相独立，互不影响；
+方法就是与实例绑定的函数，和普通函数不同，方法可以直接访问实例的数据；
+通过在实例上调用方法，我们就直接操作了对象内部的数据，但无需知道方法内部的实现细节。
+面向对象的三大特点:数据封装、继承和多态
+__init__方法的第一个参数永远是self，表示创建的实例本身，调用时不用传递该参数
+
+三种不同的方式修改属性的值
+1、直接通过实例进行修改
+2、通过方法进行设置
+3、通过方法进行递增
+
+继承：
+super() 是一个特殊函数，帮助Python将父类和子类关联起来
+
+try-except-else
+
+测试类：
+类继承unittest.TestCase的类、类名随意
+测试方法必须以test开头
+断言方法用来核实得到的结果是否与期望的结果一致

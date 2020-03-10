@@ -1,0 +1,51 @@
+1、安装Virtualenv pip install virtualenv
+2、创建虚拟环境 virtualenv myproject
+3、激活 运行 blogproject_env\Scripts\ 目录下的 activate
+4、安装django1.10.6： pip install django==1.10.6
+5、建立 Django 工程：django-admin startproject blogproject
+6、开启一个 Web 服务器：python manage.py runserver
+7、创建应用：python manage.py startapp blog
+8、注册应用：项目settings.py中INSTALLED_APPS
+9、迁移数据库：python manage.py makemigrations、python manage.py migrate
+10、打开一个交互命令行：python manage.py shell
+11、创建超级用户：python manage.py createsuperuser
+12、绑定 URL 与视图函数
+14、redirect可以传url，也可以传一个模型的实例，这个实例必须实现了 get_absolute_url 方法
+15、post.comment_set.all() xxx_set 属性来获取一个类似于 objects 的模型管理器，然后调用其 all 方法来返回这个 post 关联的全部评论
+Django 的开发流程：
+首先配置 URL，把 URL 和相应的视图函数绑定，一般写在 urls.py 文件里，然后在工程的 urls.py 文件引入。其次是编写视图函数，视图中需要渲染模板，
+我们也在 settings.py 中进行了模板相关的配置，让 Django 能够找到需要渲染的模板。最后把渲染完成的 HTTP 响应返回就可以了。
+16、ListView、DetailView（model、template_name、context_object_name、get_queryset）
+17、get_object_or_404
+18、URL names的命名空间：app_name = 'polls'
+19、找到python目录：python -c "import django; print(django.__path__)"
+
+20、from django.views.decorators.csrf import csrf_exempt,csrf_protect
+@csrf_protect，为当前函数强制设置防跨站请求伪造功能，即便settings中没有设置全局中间件。
+@csrf_exempt，取消当前函数防跨站请求伪造功能，即便settings中设置了全局中间件。
+
+#一个人对应一个身份证号码，一个身份证号码对应一个人OneToOneField
+
+#一本书由一家出版社发布，一个出版社发布多本书。属于一对多关系，用ForeignKey()
+pub = models.ForeignKey(Publisher)
+
+#一本书可以由多个作者合写，一个作者可以写多本书，属于多对多关系，用ManyToManyField
+authors = models.ManyToMany(Author)
+
+
+pip install django==2.0.2 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+
+
+#后台action显示控制
+后台应用排序
+错误提示具体到字段
+富文本文本转义
+404页面
+---------------
+后台封面图显示
+收藏对象
+后台上传图片后编辑时还需要重传
+inlines无法添加
+富文本显示
+
+
